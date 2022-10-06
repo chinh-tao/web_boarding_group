@@ -18,7 +18,7 @@ class HomeView extends GetView<HomeController> {
         child: GestureDetector(
           onTap: () => Get.rootDelegate.toNamed(Routes.LOGIN),
           child: Text(
-            'new web host new web host new web host',
+            'Content home',
             style: TextStyle(fontSize: 20),
           ),
         ),
