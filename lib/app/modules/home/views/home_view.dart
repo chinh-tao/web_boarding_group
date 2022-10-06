@@ -1,27 +1,55 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:web_boarding_group/app/modules/common/config.dart';
+import 'package:web_boarding_group/app/modules/widget/custom_input.dart';
 import 'package:web_boarding_group/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: GestureDetector(
-          onTap: () => Get.rootDelegate.toNamed(Routes.LOGIN),
-          child: Text(
-            'Content home',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
+      backgroundColor: kGreyColor_50,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: SizedBox(
+              width: 700,
+              child: Card(
+                elevation: 20,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: IntrinsicHeight(
+                  child: Row(
+                    children: [
+                      Expanded(child: Image.asset('assets/images/logo.png')),
+                      const VerticalDivider(
+                          color: kBlackColor_900,
+                          thickness: 1.3,
+                          endIndent: 100,
+                          indent: 100),
+                      Expanded(
+                          child: Column(
+                        children: [
+                          // CustomInput(
+                          //   title: ,
+                          //   controller: controller,
+                          //    err: err)
+                        ],
+                      ))
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
