@@ -14,6 +14,8 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
+    inputEmail.text = 'chinhtao1908@gmail.com';
+    inputPass.text = 'Ssv@1234';
     super.onInit();
   }
 
@@ -49,7 +51,7 @@ class LoginController extends GetxController {
     return result;
   }
 
-  Future<void> submit() async {
+  Future<void> submit(context) async {
     if (!validator) return;
     final form = {
       "email": inputEmail.text.trim(),
@@ -60,9 +62,10 @@ class LoginController extends GetxController {
     final res = await api.post('/login', data: form);
     isLoading(false);
     if (res.statusCode == 200 && res.data['code'] == 0) {
-      //Utils.messSuccess(res.data['message']);
+      Utils.messSuccess(context, res.data['message']);
     } else {
-      //Utils.messError(res.data['message']);
+      Utils.messError(context, res.data['message']);
     }
+    update();
   }
 }

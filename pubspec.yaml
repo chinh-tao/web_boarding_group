@@ -25,4 +25,14 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+  fonts:
+    - family: IconDelete
+      fonts:
+        - asset: assets/font/IconDelete.ttf
+    - family: IconTick
+      fonts:
+        - asset: assets/font/IconTick.ttf
+    - family: IconWarning
+      fonts:
+        - asset: assets/font/IconWarning.ttf         
 

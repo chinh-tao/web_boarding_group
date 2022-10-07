@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:web_boarding_group/app/modules/widget/icon/icon_delete_icons.dart';
+import 'package:web_boarding_group/app/modules/widget/icon/icon_tick_icons.dart';
+import 'package:web_boarding_group/app/modules/widget/icon/icon_warning_icons.dart';
 
 import '../common/config.dart';
 import 'primary_style.dart';
@@ -9,91 +11,89 @@ class Utils {
   static void showMessage(
       {required Color color,
       required String text,
+      required IconData icons,
+      required BuildContext context,
       int duration = 0,
-      AlignmentGeometry alignment = Alignment.center,
-      TextAlign textAlign = TextAlign.center,
-      Function()? onPressed}) {
+      Function()? canPressed}) {
     showDialog(
-        context: Get.context!,
+        context: context,
         barrierDismissible: false,
         builder: (context) {
-          return AlertDialog(
-            title: Column(children: [
-              Align(
-                alignment: alignment,
-                child: Text(text,
-                    style: const TextStyle(
-                        fontSize: 17,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                    textAlign: textAlign),
+          return Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.zero,
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                child: AlertDialog(
+                  title: Icon(icons, color: Colors.white, size: 80),
+                  titlePadding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        constraints: const BoxConstraints(maxWidth: 400),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(text,
+                              style: const TextStyle(
+                                  fontSize: 17, color: Colors.white)),
+                        ),
+                      )
+                    ],
+                  ),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  actionsPadding: EdgeInsets.zero,
+                  insetPadding: EdgeInsets.zero,
+                  backgroundColor: color,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                ),
               ),
-              if (duration == 0) ...[
-                const SizedBox(height: 20),
-                Container(
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(right: 15),
-                  child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          fixedSize: const Size(100, 45),
-                          side:
-                              const BorderSide(color: Colors.white, width: 2)),
-                      onPressed: onPressed,
-                      child: const Text("OK",
-                          style: TextStyle(fontSize: 14, color: Colors.white))),
-                )
-              ]
-            ]),
-            titlePadding:
-                const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            content: SizedBox(width: Get.width),
-            contentPadding: EdgeInsets.zero,
-            actionsPadding: EdgeInsets.zero,
-            insetPadding: EdgeInsets.zero,
-            backgroundColor: color,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(0))),
+            ),
           );
         });
 
     //sau 1s dialog tự động tắt
-    if (duration != 0) {
-      Future.delayed(Duration(milliseconds: duration), () {
-        Get.back();
-      });
-    }
+    Future.delayed(Duration(milliseconds: duration), () {
+      Navigator.of(context).pop();
+    });
   }
 
-  static void messWarning(String content) {
+  static void messWarning(BuildContext context, String content) {
     showMessage(
-        onPressed: () => Get.back(),
-        alignment: Alignment.centerLeft,
-        textAlign: TextAlign.left,
+        duration: 2000,
+        icons: IconWarning.info_circled_alt,
         color: kYellowColor_800,
-        text: content);
+        text: content,
+        canPressed: () => Navigator.of(context).pop(),
+        context: context);
   }
 
-  static void messError(String content) {
+  static void messError(BuildContext context, String content) {
     showMessage(
-        onPressed: () => Get.back(),
-        alignment: Alignment.centerLeft,
-        textAlign: TextAlign.left,
-        color: kRedColor_600,
-        text: content);
+        duration: 2000,
+        icons: IconDelete.cancel_circled2,
+        color: kRedColor_400,
+        text: content,
+        canPressed: () => Navigator.of(context).pop(),
+        context: context);
   }
 
-  static void messSuccess(String content) {
+  static void messSuccess(BuildContext context, String content) {
     showMessage(
         duration: 1500,
-        alignment: Alignment.center,
-        textAlign: TextAlign.left,
+        icons: IconTick.ok_circled2,
         color: kGreenColor_700,
-        text: content);
+        text: content,
+        context: context);
   }
 
-  static void showMessPopup({required String content, Function()? onPressed}) {
+  static void showMessPopup(BuildContext context,
+      {required String content, Function()? onPressed}) {
     showDialog(
-        context: Get.context!,
+        context: context,
         builder: (context) {
           return AlertDialog(
             shape:
@@ -104,7 +104,7 @@ class Utils {
                 const EdgeInsets.only(bottom: 5, top: 23, left: 20, right: 20),
             actions: [
               TextButton(
-                  onPressed: () => Get.back(),
+                  onPressed: () => Navigator.of(context).pop(),
                   child: Text(
                     'hủy',
                     style: PrimaryStyle.medium(18, color: kIndigoBlueColor900),

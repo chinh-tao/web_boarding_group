@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp.router(
+        scrollBehavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
         title: "Boarding Group",
         getPages: AppPages.routes,
         routerDelegate: AppRouterDelegate(),
@@ -55,4 +57,12 @@ class MyApp extends StatelessWidget {
                 .textTheme
                 .apply(bodyColor: kBodyText, displayColor: kBodyText)));
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
