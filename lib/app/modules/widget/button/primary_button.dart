@@ -8,14 +8,12 @@ class PrimaryButton extends StatelessWidget {
       {Key? key,
       required this.content,
       required this.onPressed,
-      this.colors = kIndigoBlueColor900,
-      this.sizeContent = 12})
+      this.colors = kIndigoBlueColor900})
       : super(key: key);
 
   final Function()? onPressed;
   final Color? colors;
-  final String content;
-  final double sizeContent;
+  final Widget content;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +23,6 @@ class PrimaryButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30))),
         onPressed: onPressed,
-        child: Text(
-          content,
-          style: PrimaryStyle.normal(sizeContent),
-        ));
+        child: content);
   }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 //192.168.19.91 (CT)
 //192.168.0.104 (LN)
-const kUrl = 'https://boarding-group.herokuapp.com/web';
+const kApiUrlStaging = 'http://192.168.19.91:8000/web';
+const kApiUrlProduction = 'https://boarding-group.herokuapp.com/web';
 
 //config color
 const kGreyColor_50 = Color(0xfffafafa);
