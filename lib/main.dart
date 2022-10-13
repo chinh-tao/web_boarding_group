@@ -47,7 +47,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('abc');
     return GetMaterialApp.router(
         scrollBehavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
         title: "Boarding Group",

@@ -52,7 +52,7 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
 
           pathName = null;
           isError = false;
-          GeneralRouterDelegate();
+          _setState();
           return true;
         });
   }
@@ -84,6 +84,11 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
   void setPathName(String pathName) {
     this.pathName = pathName;
     setNewRoutePath(GeneralRouterPath.otherPage(this.pathName));
+    _setState();
+  }
+
+  void _setState() {
+    notifyListeners();
     GeneralRouterDelegate();
   }
 }
