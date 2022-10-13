@@ -34,5 +34,8 @@ flutter:
         - asset: assets/font/IconTick.ttf
     - family: IconWarning
       fonts:
-        - asset: assets/font/IconWarning.ttf         
+        - asset: assets/font/IconWarning.ttf 
+    - family: IconNetwork
+      fonts:
+        - asset: assets/font/IconNetwork.ttf               
 

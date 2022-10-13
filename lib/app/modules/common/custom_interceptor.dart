@@ -1,24 +1,24 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:get/route_manager.dart';
 import 'package:logger/logger.dart';
+import 'package:web_boarding_group/app/routes/app_pages.dart';
 
 import 'config.dart';
-import 'utils.dart';
 
 class CustomInterceptors extends Interceptor {
   final _log = Logger();
-  StreamSubscription? subscription;
 
   CustomInterceptors();
 
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    // if (!await handleListenConnect) {
-    //   Utils.messWarning(MSG_NOT_CONNECT);
-    //   return;
-    // }
+    if (!await handleListenConnect) {
+      Get.rootDelegate.offNamed(Routes.NOT_CONNECT);
+      return;
+    }
     options.baseUrl = kApiUrlStaging;
     _log.i(
         'TYPE: Request,\nPATH: ${options.path},\nMETHOD: ${options.method},\nDATA: ${options.data}');
@@ -36,10 +36,10 @@ class CustomInterceptors extends Interceptor {
   void onError(DioError err, ErrorInterceptorHandler handler) {
     _log.e(
         'TYPE: DioError,\nSTATUSCODE: ${err.response!.statusCode},\nPATH: ${err.requestOptions.path},\nMETHOD: ${err.requestOptions.method},\nMESSAGE: ${err.message}');
-    // if (err.type == DioErrorType.receiveTimeout) {
-    //   Utils.messWarning(MSG_TIME_OUT);
-    //   return;
-    // }
+    if (err.type == DioErrorType.receiveTimeout) {
+      Get.rootDelegate.offNamed(Routes.TIME_OUT);
+      return;
+    }
     super.onError(err, handler);
   }
 

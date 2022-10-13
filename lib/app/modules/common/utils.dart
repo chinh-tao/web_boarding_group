@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:web_boarding_group/app/modules/widget/icon/icon_delete_icons.dart';
 import 'package:web_boarding_group/app/modules/widget/icon/icon_tick_icons.dart';
 import 'package:web_boarding_group/app/modules/widget/icon/icon_warning_icons.dart';

@@ -7,6 +7,7 @@ const kApiUrlProduction = 'https://boarding-group.herokuapp.com/web';
 
 //config color
 const kGreyColor_50 = Color(0xfffafafa);
+const kSlateColor = Color.fromRGBO(203, 213, 225, 1);
 const kBodyText = Color(0xff707070);
 const kBlackColor_900 = Color(0xff212121);
 const kBlackColor_800 = Color(0xff253439);

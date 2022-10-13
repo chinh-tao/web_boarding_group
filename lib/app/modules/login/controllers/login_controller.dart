@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:web_boarding_group/app/modules/common/api.dart';
 import 'package:web_boarding_group/app/modules/common/utils.dart';
+import 'package:web_boarding_group/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
   final TextEditingController inputEmail = TextEditingController();
@@ -62,7 +63,11 @@ class LoginController extends GetxController {
     final res = await api.post('/login', data: form);
     isLoading(false);
     if (res.statusCode == 200 && res.data['code'] == 0) {
-      Utils.messSuccess(context, res.data['message']);
+      // Utils.messSuccess(context, res.data['message']);
+      Navigator.of(context).pushNamed(Routes.TIME_OUT);
+      // Get.offAllNamed(Routes.TIME_OUT);
+      // Get.rootDelegate.toNamed(Routes.TIME_OUT);
+      // Get.rootDelegate.popHistory();
     } else {
       Utils.messError(context, res.data['message']);
     }
