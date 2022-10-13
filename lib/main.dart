@@ -6,13 +6,12 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-import 'package:web_boarding_group/app/modules/login/bindings/login_binding.dart';
-import 'package:web_boarding_group/app/modules/navigation/general_route_information_parser.dart';
-import 'package:web_boarding_group/app/modules/navigation/general_router_delegate.dart';
 
 import 'app/modules/common/api.dart';
 import 'app/modules/common/config.dart';
 import 'app/modules/common/custom_interceptor.dart';
+import 'app/modules/widget/router_delegate/general_route_information_parser.dart';
+import 'app/modules/widget/router_delegate/general_router_delegate.dart';
 import 'app/routes/app_pages.dart';
 
 final _log = Logger();
@@ -48,11 +47,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('abc');
     return GetMaterialApp.router(
         scrollBehavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
         title: "Boarding Group",
         getPages: AppPages.routes,
-        //routerDelegate: GeneralRouterDelegate(),
+        routerDelegate: GeneralRouterDelegate(),
         routeInformationParser: GeneralRouteInformationParser(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

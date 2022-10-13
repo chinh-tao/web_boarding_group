@@ -19,7 +19,7 @@ class CustomInterceptors extends Interceptor {
       Get.rootDelegate.offNamed(Routes.NOT_CONNECT);
       return;
     }
-    options.baseUrl = kApiUrlStaging;
+    options.baseUrl = kApiUrlProduction;
     _log.i(
         'TYPE: Request,\nPATH: ${options.path},\nMETHOD: ${options.method},\nDATA: ${options.data}');
     super.onRequest(options, handler);

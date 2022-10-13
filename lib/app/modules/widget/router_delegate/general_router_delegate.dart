@@ -1,9 +1,7 @@
-import 'package:get/get.dart';
-import 'package:web_boarding_group/app/modules/login/controllers/login_controller.dart';
 import 'package:web_boarding_group/app/modules/login/views/login_view.dart';
-import 'package:web_boarding_group/not_connect_view.dart';
-import 'package:web_boarding_group/time_out_view.dart';
+import 'package:web_boarding_group/app/modules/not_found_view.dart';
 
+import 'general_page.dart';
 import 'general_router_path.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +11,9 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
   String? pathName;
   bool isError = false;
 
-  // factory GeneralRouterDelegate({bool? isLoggedIn}) {
-  //   _instance.isLoggedIn = isLoggedIn;
-  //   return _instance;
-  // }
+  factory GeneralRouterDelegate() {
+    return _instance;
+  }
 
   GeneralRouterDelegate._();
 
@@ -27,15 +24,9 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
   GeneralRouterPath get currentConfiguration {
     if (isError) return GeneralRouterPath.unKown();
 
-    // if (pathName == null) return GeneralRouterPath.home();
+    if (pathName == null) return GeneralRouterPath.home();
 
     return GeneralRouterPath.otherPage(pathName);
-  }
-
-  void onTapped(String path) {
-    pathName = path;
-    print(pathName);
-    notifyListeners();
   }
 
   @override
@@ -43,29 +34,33 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
     return Navigator(
         key: navigatorKey,
         pages: [
-          MaterialPage(
-            key: const ValueKey('LoginView'),
-            child: const LoginView(),
-          ),
+          if (pathName == null)
+            const MaterialPage(
+              key: ValueKey('Login'),
+              child: LoginView(),
+            ),
           if (isError)
+            const MaterialPage(
+                key: ValueKey('Not Found'), child: NotFoundView()),
+          if (pathName != null)
             MaterialPage(
-                key: ValueKey('NotConnectView'), child: NotConnectView())
-          else if (pathName != null)
-            MaterialPage(key: ValueKey(pathName), child: TimeOutView())
+                key: ValueKey(pathName),
+                child: GeneralPage(pathName: pathName!))
         ],
         onPopPage: (route, result) {
           if (!route.didPop(result)) return false;
 
           pathName = null;
           isError = false;
-          notifyListeners();
-
+          GeneralRouterDelegate();
           return true;
         });
   }
 
   @override
   Future<void> setNewRoutePath(GeneralRouterPath generalRoutePath) async {
+    pathName = generalRoutePath.pathName;
+
     if (generalRoutePath.isUnkown) {
       pathName = null;
       isError = true;
@@ -84,5 +79,11 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
     } else {
       pathName = null;
     }
+  }
+
+  void setPathName(String pathName) {
+    this.pathName = pathName;
+    setNewRoutePath(GeneralRouterPath.otherPage(this.pathName));
+    GeneralRouterDelegate();
   }
 }

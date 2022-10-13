@@ -2,7 +2,9 @@ class GeneralRouterPath {
   final String? pathName;
   final bool isUnkown;
 
-  GeneralRouterPath.home(this.pathName) : isUnkown = false;
+  GeneralRouterPath.home()
+      : pathName = null,
+        isUnkown = false;
 
   GeneralRouterPath.otherPage(this.pathName) : isUnkown = false;
 

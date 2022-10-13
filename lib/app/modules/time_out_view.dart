@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'app/modules/common/config.dart';
-import 'app/modules/common/primary_style.dart';
+import 'common/config.dart';
+import 'common/primary_style.dart';
 
 class TimeOutView extends StatelessWidget {
   const TimeOutView({Key? key}) : super(key: key);
