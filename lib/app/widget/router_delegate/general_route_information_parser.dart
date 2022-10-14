@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../common/utils.dart';
 import 'general_router_path.dart';
 
 class GeneralRouteInformationParser
@@ -13,14 +14,11 @@ class GeneralRouteInformationParser
       return GeneralRouterPath.home();
     }
 
-    // if (uri.queryParameters.isNotEmpty) {
-    //   return GeneralRouterPath.otherPage(
-    //       routeInformation.location!.replaceFirst("/", ""));
-    // }
-
     if (uri.pathSegments.length == 1) {
       final pathName = uri.pathSegments.elementAt(0).toString();
-      if (pathName == null) return GeneralRouterPath.unKown();
+      if (!Utils.routerName.contains(pathName.toString())) {
+        return GeneralRouterPath.unKown();
+      }
       return GeneralRouterPath.otherPage(pathName);
     }
     return GeneralRouterPath.unKown();
@@ -30,7 +28,7 @@ class GeneralRouteInformationParser
   RouteInformation? restoreRouteInformation(
       GeneralRouterPath generalRouterPath) {
     if (generalRouterPath.isUnkown) {
-      return const RouteInformation(location: '/error');
+      return const RouteInformation(location: '/not-found');
     }
     if (generalRouterPath.isGeneralPage) {
       return const RouteInformation(location: '/');

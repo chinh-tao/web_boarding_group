@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:web_boarding_group/app/modules/widget/button/primary_button.dart';
+import 'package:web_boarding_group/app/widget/button/primary_button.dart';
 
 import '../../common/config.dart';
 import '../../common/primary_style.dart';

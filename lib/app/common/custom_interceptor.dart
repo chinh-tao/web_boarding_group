@@ -1,25 +1,26 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:get/route_manager.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart';
-import 'package:web_boarding_group/app/routes/app_pages.dart';
 
 import 'config.dart';
 
 class CustomInterceptors extends Interceptor {
   final _log = Logger();
-
   CustomInterceptors();
 
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     if (!await handleListenConnect) {
-      Get.rootDelegate.offNamed(Routes.NOT_CONNECT);
+      Fluttertoast.showToast(
+          msg: MSG_NOT_CONNECT,
+          timeInSecForIosWeb: 10,
+          gravity: ToastGravity.TOP);
       return;
     }
-    options.baseUrl = kApiUrlProduction;
+    options.baseUrl = kApiUrlStaging;
     _log.i(
         'TYPE: Request,\nPATH: ${options.path},\nMETHOD: ${options.method},\nDATA: ${options.data}');
     super.onRequest(options, handler);
@@ -37,7 +38,8 @@ class CustomInterceptors extends Interceptor {
     _log.e(
         'TYPE: DioError,\nSTATUSCODE: ${err.response!.statusCode},\nPATH: ${err.requestOptions.path},\nMETHOD: ${err.requestOptions.method},\nMESSAGE: ${err.message}');
     if (err.type == DioErrorType.receiveTimeout) {
-      Get.rootDelegate.offNamed(Routes.TIME_OUT);
+      Fluttertoast.showToast(
+          msg: MSG_TIME_OUT, timeInSecForIosWeb: 10, gravity: ToastGravity.TOP);
       return;
     }
     super.onError(err, handler);

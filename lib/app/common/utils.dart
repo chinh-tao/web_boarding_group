@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:web_boarding_group/app/modules/widget/icon/icon_delete_icons.dart';
-import 'package:web_boarding_group/app/modules/widget/icon/icon_tick_icons.dart';
-import 'package:web_boarding_group/app/modules/widget/icon/icon_warning_icons.dart';
+import 'package:web_boarding_group/app/routes/app_pages.dart';
+import 'package:web_boarding_group/app/widget/icon/icon_delete_icons.dart';
+import 'package:web_boarding_group/app/widget/icon/icon_tick_icons.dart';
+import 'package:web_boarding_group/app/widget/icon/icon_warning_icons.dart';
 
 import '../common/config.dart';
 import 'primary_style.dart';
@@ -119,5 +119,14 @@ class Utils {
             ],
           );
         });
+  }
+
+  static List<String> get routerName {
+    var result = <String>['null'];
+    for (var data in AppPages.routes) {
+      final name = data.name.replaceFirst('/', '');
+      result.add(name);
+    }
+    return result;
   }
 }

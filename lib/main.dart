@@ -6,19 +6,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-
-import 'app/modules/common/api.dart';
-import 'app/modules/common/config.dart';
-import 'app/modules/common/custom_interceptor.dart';
-import 'app/modules/widget/router_delegate/general_route_information_parser.dart';
-import 'app/modules/widget/router_delegate/general_router_delegate.dart';
+import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
+import 'app/common/api.dart';
+import 'app/common/config.dart';
+import 'app/common/custom_interceptor.dart';
 import 'app/routes/app_pages.dart';
+import 'app/widget/router_delegate/general_route_information_parser.dart';
+import 'app/widget/router_delegate/general_router_delegate.dart';
 
 final _log = Logger();
 
 void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    runApp(const MyApp());
 
     api.options
       ..connectTimeout = 10000
@@ -35,18 +36,29 @@ void main() {
           ],
           retries: 3)
     ]);
-    runApp(const MyApp());
   }, (err, stackTrace) {
     _log.e("App Error: $err");
     _log.d("StackTrace: $stackTrace");
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    Get.put(AuthController());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    context = context;
     return GetMaterialApp.router(
         scrollBehavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
         title: "Boarding Group",

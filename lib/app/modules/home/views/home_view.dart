@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:web_boarding_group/app/modules/common/config.dart';
-import 'package:web_boarding_group/app/modules/widget/custom_input.dart';
-import 'package:web_boarding_group/app/routes/app_pages.dart';
 
+import '../../../common/config.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {

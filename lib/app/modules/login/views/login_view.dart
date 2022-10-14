@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:web_boarding_group/app/modules/common/primary_style.dart';
 import 'package:web_boarding_group/app/modules/login/bindings/login_binding.dart';
-import 'package:web_boarding_group/app/modules/widget/button/button_loading.dart';
 import 'package:web_boarding_group/app/routes/app_pages.dart';
 
-import '../../common/config.dart';
-import '../../widget/custom_input.dart';
+import '../../../common/config.dart';
+import '../../../common/primary_style.dart';
+import '../../../widget/button/button_loading.dart';
+import '../../../widget/custom_input.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {

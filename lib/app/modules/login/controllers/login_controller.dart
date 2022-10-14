@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:web_boarding_group/app/modules/common/api.dart';
-import 'package:web_boarding_group/app/modules/common/utils.dart';
-import 'package:web_boarding_group/app/modules/widget/router_delegate/general_router_delegate.dart';
-import 'package:web_boarding_group/app/modules/widget/router_delegate/general_router_path.dart';
+import 'package:web_boarding_group/app/model/admin_model.dart';
+import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
 import 'package:web_boarding_group/app/routes/app_pages.dart';
 
+import '../../../common/api.dart';
+import '../../../common/utils.dart';
+import '../../../widget/router_delegate/general_router_delegate.dart';
+
 class LoginController extends GetxController {
+  final AuthController authController = Get.find();
+
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPass = TextEditingController();
 
@@ -65,7 +69,8 @@ class LoginController extends GetxController {
     final res = await api.post('/login', data: form);
     isLoading(false);
     if (res.statusCode == 200 && res.data['code'] == 0) {
-      GeneralRouterDelegate().setPathName('home');
+      authController.admin.value = AdminModel.fromJson(res.data['payload']);
+      GeneralRouterDelegate().setPathName(Routes.HOME);
     } else {
       Utils.messError(context, res.data['message']);
     }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
-
-import 'common/config.dart';
-import 'common/primary_style.dart';
+import '../common/config.dart';
+import '../common/primary_style.dart';
 
 class NotFoundView extends StatelessWidget {
   const NotFoundView({Key? key}) : super(key: key);
@@ -22,7 +20,7 @@ class NotFoundView extends StatelessWidget {
               SizedBox(height: _size.height / 5),
               Text('404!', style: PrimaryStyle.medium(96, color: kSlateColor)),
               const SizedBox(height: 10),
-              Text('Không tìm thấy trang bạn yêu cầu',
+              Text('không tìm thấy trang bạn yêu cầu',
                   style: PrimaryStyle.medium(30, color: kSlateColor))
             ],
           ),

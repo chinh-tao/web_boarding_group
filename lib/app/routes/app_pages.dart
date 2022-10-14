@@ -5,8 +5,6 @@ import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/not_found_view.dart';
-import '../modules/not_connect_view.dart';
-import '../modules/time_out_view.dart';
 
 part 'app_routes.dart';
 
@@ -25,14 +23,6 @@ class AppPages {
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
-    ),
-    GetPage(
-      name: _Paths.NOT_CONNECT,
-      page: () => const NotConnectView(),
-    ),
-    GetPage(
-      name: _Paths.TIME_OUT,
-      page: () => const TimeOutView(),
     ),
     GetPage(
       name: _Paths.NOT_FOUND,
