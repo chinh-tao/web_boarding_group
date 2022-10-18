@@ -27,35 +27,11 @@ class AuthController extends GetxController {
   }
 
   void initData() {
+    html.window.onBeforeUnload.listen((event) async {
+      isLoad = true;
+    });
     if (!isLoad) {
-      html.window.onBeforeUnload.listen((event) async {
-        // print('1: ${event.bubbles}');
-        // if (event.bubbles == null || event.bubbles!) {
-        //   storage.remove('is_login');
-        // }
-        // // print('2: ${event.cancelable}');
-        // if (event.cancelable == null || !event.cancelable!) {
-        //   storage.remove('is_login');
-        // }
-        // // print('3: ${event.composed}');
-        // if (event.composed == null || event.composed!) {
-        //   storage.remove('is_login');
-        // }
-        // // print('4: ${event.defaultPrevented}');
-        // if (event.defaultPrevented) {
-        //   storage.remove('is_login');
-        // }
-        // // print('5: ${event.isTrusted}');
-        // if (event.isTrusted == null || !event.isTrusted!) {
-        //   storage.remove('is_login');
-        // }
-        // // print('6: ${event.type}');
-        // // print('7: ${event.isBlank}');
-        // if (event.isBlank == null || event.isBlank!) {
-        //   storage.remove('is_login');
-        // }
-        storage.remove('is_login');
-      });
+      storage.remove('is_login');
     }
   }
 }
