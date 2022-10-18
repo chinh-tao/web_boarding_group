@@ -32,14 +32,16 @@ class AuthController extends GetxController {
     print('iii: ${admin.value.name}');
     print('lll: ${html.window.localStorage['is_login']}');
     html.window.onBeforeUnload.listen((event) async {
-      isRefresh = true;
-      if (!isRefresh) {
+      if (html.window.localStorage['is_refresh'] == null) {
+        html.window.localStorage['is_refresh'] = '1';
+      } else {
         html.window.localStorage.remove('is_login');
+        html.window.localStorage.remove('is_refresh');
       }
     });
-    if (isRefresh) {
+    if (html.window.localStorage['is_refresh'] == '1') {
       admin.value.name = "Nguyễn Thị Vân";
-      isRefresh = false;
+      html.window.localStorage['is_refresh'] = '2';
       print('sss');
     }
     // else if ((html.window.localStorage['is_login'] != null) &&
