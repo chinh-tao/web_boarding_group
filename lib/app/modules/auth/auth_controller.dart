@@ -30,15 +30,15 @@ class AuthController extends GetxController {
 
   void initData() {
     print('iii: ${admin.value.name}');
-    print('lll: ${html.window.localStorage['is_login']}');
-    if ((html.window.localStorage['is_login'] == null) &&
+    print('lll: ${GeneralRouterDelegate().pathName}');
+    if ((GeneralRouterDelegate().pathName == Routes.HOME) &&
         (admin.value.name == null)) {
+      admin.value.name = "Nguyễn Thị Vân";
+      print('sss');
+    } else {
       html.window.onBeforeUnload.listen((event) async {
         html.window.localStorage.remove('is_login');
       });
-      print('sss');
-    } else {
-      admin.value.name = "Nguyễn Thị Vân";
       print('ccc');
     }
   }
