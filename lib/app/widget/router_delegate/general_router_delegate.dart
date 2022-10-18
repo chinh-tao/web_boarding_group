@@ -5,6 +5,7 @@ import 'package:web_boarding_group/app/modules/login/views/login_view.dart';
 import 'package:web_boarding_group/app/modules/not_found_view.dart';
 import 'package:web_boarding_group/app/routes/app_pages.dart';
 
+import 'dart:html' as html;
 import '../../common/utils.dart';
 import 'general_page.dart';
 import 'general_router_path.dart';
@@ -68,20 +69,21 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
     pathName = generalRoutePath.pathName;
     // print(generalRoutePath.pathName);
     // print(Utils.routerName.contains(pathName.toString()));
-    // print(storage['is_login']);
+    print(html.window.localStorage['is_login']);
 
     if (!Utils.routerName.contains(pathName.toString()) ||
         generalRoutePath.isUnkown) {
       // print('1');
       pathName = Routes.NOT_FOUND;
       isError = true;
-    } else if (storage['is_login'] != null) {
+    } else if (html.window.localStorage['is_login'] != null) {
       pathName = Routes.HOME;
       isError = false;
     } else if (generalRoutePath.isOtherPage) {
       if (![null, Routes.NOT_FOUND].contains(pathName)) {
         // print('2');
-        if (pathName == Routes.HOME && (storage['is_login'] == null)) {
+        if (pathName == Routes.HOME &&
+            (html.window.localStorage['is_login'] == null)) {
           pathName = null;
           isError = false;
         } else {

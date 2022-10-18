@@ -2,6 +2,8 @@ import 'dart:html' as html;
 
 import 'package:get/get.dart';
 import 'package:web_boarding_group/app/model/admin_model.dart';
+import 'package:web_boarding_group/app/routes/app_pages.dart';
+import 'package:web_boarding_group/app/widget/router_delegate/general_router_delegate.dart';
 
 import '../../common/global.dart';
 
@@ -23,18 +25,21 @@ class AuthController extends GetxController {
 
   @override
   void onClose() {
-    storage.remove('is_login');
     super.onClose();
   }
 
   void initData() {
-    // html.window.onBeforeUnload.listen((event) async {
-    //   isRefresh = true;
-    //   print('qqq');
-    // });
-    // if (!isRefresh) {
-    //   print(admin.value.name);
-    //   storage.remove('is_login');
-    // }
+    print('iii: ${admin.value.name}');
+    print('lll: ${html.window.localStorage['is_login']}');
+    if ((html.window.localStorage['is_login'] == null) &&
+        (admin.value.name == null)) {
+      html.window.onBeforeUnload.listen((event) async {
+        html.window.localStorage.remove('is_login');
+      });
+      print('sss');
+    } else {
+      admin.value.name = "Nguyễn Thị Vân";
+      print('ccc');
+    }
   }
 }
