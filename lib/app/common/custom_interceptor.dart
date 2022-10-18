@@ -20,7 +20,7 @@ class CustomInterceptors extends Interceptor {
           gravity: ToastGravity.TOP);
       return;
     }
-    options.baseUrl = kApiUrlStaging;
+    options.baseUrl = kApiUrlProduction;
     _log.i(
         'TYPE: Request,\nPATH: ${options.path},\nMETHOD: ${options.method},\nDATA: ${options.data}');
     super.onRequest(options, handler);

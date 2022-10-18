@@ -1,5 +1,8 @@
+import 'dart:html' as html;
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:web_boarding_group/app/common/global.dart';
 import 'package:web_boarding_group/app/model/admin_model.dart';
 import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
 import 'package:web_boarding_group/app/routes/app_pages.dart';
@@ -14,6 +17,7 @@ class LoginController extends GetxController {
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPass = TextEditingController();
 
+  final generalRouterDelegate = GeneralRouterDelegate();
   final listErr = <String>["", ""].obs;
   final isLoading = false.obs;
   final regex = RegExp(
@@ -46,10 +50,12 @@ class LoginController extends GetxController {
       listErr[0] = 'địa chỉ email không hợp lệ';
       result = false;
     }
-    if (inputPass.text.trim().isEmpty) {
+    if (generalRouterDelegate.pathName == null &&
+        inputPass.text.trim().isEmpty) {
       listErr[1] = 'mật khẩu không được để trống';
       result = false;
-    } else if (!regex.hasMatch(inputPass.text.trim())) {
+    } else if (generalRouterDelegate.pathName == null &&
+        !regex.hasMatch(inputPass.text.trim())) {
       listErr[1] =
           'mật khẩu phải có 8-16 ký tự chữ và số bao gồm cả chữ hoa, chữ thường và số';
       result = false;
@@ -58,7 +64,15 @@ class LoginController extends GetxController {
     return result;
   }
 
-  Future<void> submit(context) async {
+  void submit(context) async {
+    if (generalRouterDelegate.pathName == null) {
+      await handleLogin(context);
+    } else {
+      await handleForgotPass(context);
+    }
+  }
+
+  Future<void> handleLogin(context) async {
     if (!validator) return;
     final form = {
       "email": inputEmail.text.trim(),
@@ -68,12 +82,38 @@ class LoginController extends GetxController {
     isLoading(true);
     final res = await api.post('/login', data: form);
     isLoading(false);
+
     if (res.statusCode == 200 && res.data['code'] == 0) {
       authController.admin.value = AdminModel.fromJson(res.data['payload']);
-      GeneralRouterDelegate().setPathName(Routes.HOME);
+      storage['is_login'] = 'done';
+      GeneralRouterDelegate().setPathName(pathName: Routes.HOME);
     } else {
       Utils.messError(context, res.data['message']);
     }
     update();
+  }
+
+  Future<void> handleForgotPass(context) async {
+    if (!validator) return;
+    final form = {'email': inputEmail.text.trim()};
+
+    isLoading(true);
+    final res = await api.post('/forgot-pass', data: form);
+    isLoading(false);
+
+    if (res.statusCode == 200 && res.data['code'] == 0) {
+      Utils.messSuccess(context, res.data['message']);
+    } else {
+      Utils.messError(context, res.data['message']);
+    }
+    update();
+  }
+
+  void transport() {
+    if (generalRouterDelegate.pathName == Routes.FORGOT_PASS) {
+      html.window.history.back();
+    } else {
+      generalRouterDelegate.setPathName(pathName: Routes.FORGOT_PASS);
+    }
   }
 }

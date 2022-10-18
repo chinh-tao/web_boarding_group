@@ -28,5 +28,9 @@ class AppPages {
       name: _Paths.NOT_FOUND,
       page: () => const NotFoundView(),
     ),
+    GetPage(
+      name: _Paths.FORGOT_PASS,
+      page: () => const LoginView(),
+    ),
   ];
 }

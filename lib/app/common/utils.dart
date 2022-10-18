@@ -14,8 +14,7 @@ class Utils {
       required String text,
       required IconData icons,
       required BuildContext context,
-      int duration = 0,
-      Function()? canPressed}) {
+      int duration = 0}) {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -58,7 +57,7 @@ class Utils {
 
     //sau 1s dialog tự động tắt
     Future.delayed(Duration(milliseconds: duration), () {
-      Navigator.of(context).pop();
+      Navigator.of(context, rootNavigator: true).pop();
     });
   }
 
@@ -68,7 +67,6 @@ class Utils {
         icons: IconWarning.info_circled_alt,
         color: kYellowColor_800,
         text: content,
-        canPressed: () => Navigator.of(context).pop(),
         context: context);
   }
 
@@ -78,7 +76,6 @@ class Utils {
         icons: IconDelete.cancel_circled2,
         color: kRedColor_400,
         text: content,
-        canPressed: () => Navigator.of(context).pop(),
         context: context);
   }
 
@@ -124,8 +121,7 @@ class Utils {
   static List<String> get routerName {
     var result = <String>['null'];
     for (var data in AppPages.routes) {
-      final name = data.name.replaceFirst('/', '');
-      result.add(name);
+      result.add(data.name);
     }
     return result;
   }

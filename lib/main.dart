@@ -6,11 +6,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
+import 'package:web_boarding_group/app/modules/auth/auth_binding.dart';
 import 'app/common/api.dart';
 import 'app/common/config.dart';
 import 'app/common/custom_interceptor.dart';
-import 'app/routes/app_pages.dart';
 import 'app/widget/router_delegate/general_route_information_parser.dart';
 import 'app/widget/router_delegate/general_router_delegate.dart';
 
@@ -42,29 +41,17 @@ void main() {
   });
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    Get.put(AuthController());
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    context = context;
     return GetMaterialApp.router(
         scrollBehavior: MyCustomScrollBehavior().copyWith(scrollbars: false),
         title: "Boarding Group",
-        getPages: AppPages.routes,
         routerDelegate: GeneralRouterDelegate(),
         routeInformationParser: GeneralRouteInformationParser(),
+        initialBinding: AuthBinding(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             textTheme: Theme.of(context)

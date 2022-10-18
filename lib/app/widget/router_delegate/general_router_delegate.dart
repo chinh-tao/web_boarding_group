@@ -1,4 +1,5 @@
 import 'package:get/instance_manager.dart';
+import 'package:web_boarding_group/app/common/global.dart';
 import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
 import 'package:web_boarding_group/app/modules/login/views/login_view.dart';
 import 'package:web_boarding_group/app/modules/not_found_view.dart';
@@ -12,7 +13,6 @@ import 'package:flutter/material.dart';
 class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<GeneralRouterPath> {
   static final GeneralRouterDelegate _instance = GeneralRouterDelegate._();
-  final AuthController authController = Get.find();
   bool isLogin = false;
   String? pathName;
   bool isError = false;
@@ -40,7 +40,7 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
     return Navigator(
         key: navigatorKey,
         pages: [
-          if (pathName == null) ...[
+          if (pathName == null || pathName == Routes.FORGOT_PASS) ...[
             const MaterialPage(
               key: ValueKey('Login'),
               child: LoginView(),
@@ -55,7 +55,6 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
         ],
         onPopPage: (route, result) {
           if (!route.didPop(result)) return false;
-
           pathName = null;
           isError = false;
           _setState();
@@ -64,52 +63,45 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
   }
 
   @override
-  Future<bool> popRoute() {
-    setPathName(Routes.NOT_FOUND);
-    return super.popRoute();
-  }
-
-  @override
   Future<void> setNewRoutePath(GeneralRouterPath generalRoutePath,
       {bool isLogin = false}) async {
     pathName = generalRoutePath.pathName;
     // print(generalRoutePath.pathName);
     // print(Utils.routerName.contains(pathName.toString()));
+    // print(storage['is_login']);
 
     if (!Utils.routerName.contains(pathName.toString()) ||
         generalRoutePath.isUnkown) {
-      //print('1');
-      pathName = 'not-found';
+      // print('1');
+      pathName = Routes.NOT_FOUND;
       isError = true;
+    } else if (storage['is_login'] != null) {
+      pathName = Routes.HOME;
+      isError = false;
     } else if (generalRoutePath.isOtherPage) {
-      if (![null, 'not-found'].contains(pathName)) {
-        //print('2');
-        if (pathName == 'home' && (authController.admin.value.name == null)) {
+      if (![null, Routes.NOT_FOUND].contains(pathName)) {
+        // print('2');
+        if (pathName == Routes.HOME && (storage['is_login'] == null)) {
           pathName = null;
           isError = false;
         } else {
           pathName = generalRoutePath.pathName;
           isError = false;
         }
-      } else if (!isError && pathName == 'not-found') {
-        //print('anc');
+      } else if (!isError && pathName == Routes.NOT_FOUND) {
+        // print('anc');
         isError = false;
         pathName = null;
       }
     } else {
-      if (authController.admin.value.name != null) {
-        pathName = 'home';
-        isError = false;
-      } else {
-        //print('4');
-        pathName = null;
-        isError = false;
-      }
+      // print('4');
+      pathName = null;
+      isError = false;
     }
   }
 
-  void setPathName(String pathName) {
-    this.pathName = pathName.replaceFirst('/', '');
+  void setPathName({String? pathName}) {
+    this.pathName = pathName;
     setNewRoutePath(GeneralRouterPath.otherPage(this.pathName));
     _setState();
   }
