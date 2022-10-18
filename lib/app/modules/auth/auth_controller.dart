@@ -31,11 +31,16 @@ class AuthController extends GetxController {
   void initData() {
     print('iii: ${admin.value.name}');
     print('lll: ${html.window.localStorage['is_login']}');
-    if ((html.window.localStorage['is_login'] != null) &&
-        (admin.value.name == null)) {
+    html.window.onBeforeUnload.listen((event) async {
+      isRefresh = true;
+      if (!isRefresh) {
+        html.window.localStorage.remove('is_login');
+      }
+    });
+    if (isRefresh) {
       admin.value.name = "Nguyễn Thị Vân";
+      isRefresh = false;
       print('sss');
-      return;
     }
     // else if ((html.window.localStorage['is_login'] != null) &&
     //     (admin.value.name != null)) {
@@ -44,8 +49,5 @@ class AuthController extends GetxController {
     //   });
     //   print('ccc');
     // }
-    html.window.onBeforeUnload.listen((event) async {
-      html.window.localStorage.remove('is_login');
-    });
   }
 }
