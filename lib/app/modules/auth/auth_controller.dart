@@ -23,15 +23,18 @@ class AuthController extends GetxController {
 
   @override
   void onClose() {
+    storage.remove('is_login');
     super.onClose();
   }
 
   void initData() {
-    html.window.onBeforeUnload.listen((event) async {
-      isLoad = true;
-    });
-    if (!isLoad) {
-      storage.remove('is_login');
-    }
+    // html.window.onBeforeUnload.listen((event) async {
+    //   isRefresh = true;
+    //   print('qqq');
+    // });
+    // if (!isRefresh) {
+    //   print(admin.value.name);
+    //   storage.remove('is_login');
+    // }
   }
 }
