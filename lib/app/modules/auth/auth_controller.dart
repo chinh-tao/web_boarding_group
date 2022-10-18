@@ -1,5 +1,9 @@
+import 'dart:html' as html;
+
 import 'package:get/get.dart';
 import 'package:web_boarding_group/app/model/admin_model.dart';
+
+import '../../common/global.dart';
 
 class AuthController extends GetxController {
   final admin = AdminModel().obs;
@@ -21,5 +25,9 @@ class AuthController extends GetxController {
     super.onClose();
   }
 
-  void initData() {}
+  void initData() {
+    html.window.onBeforeUnload.listen((event) async {
+      storage.remove('is_Login');
+    });
+  }
 }
