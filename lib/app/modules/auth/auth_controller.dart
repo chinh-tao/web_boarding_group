@@ -27,9 +27,10 @@ class AuthController extends GetxController {
 
   void initData() {
     html.window.onBeforeUnload.listen((event) async {
-      if (event.composed! == true || html.window.closed!) {
-        storage.remove('is_login');
+      if (event.cancelable! == true) {
+        return;
       }
+      storage.remove('is_login');
     });
   }
 }
