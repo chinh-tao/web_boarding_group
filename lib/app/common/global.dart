@@ -1,3 +1,4 @@
-import 'dart:html';
+// import 'dart:html';
 
-final Storage storage = window.localStorage;
+// final Storage storage = window.localStorage;
+bool isRefresh = false;
