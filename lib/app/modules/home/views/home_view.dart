@@ -15,7 +15,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: kGreyColor_50,
       body: InkWell(
-        onTap: () => storage.remove('is_Login'),
+        onTap: () => storage.remove('is_login'),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
