@@ -212,13 +212,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.0.9"
-  flutterwebapp_reload_detector:
-    dependency: "direct main"
-    description:
-      name: flutterwebapp_reload_detector
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.1"
   get:
     dependency: "direct main"
     description:
@@ -512,5 +505,5 @@ packages:
     source: hosted
     version: "6.1.0"
 sdks:
-  dart: ">=2.17.6 <3.0.0"
+  dart: ">=2.17.0 <3.0.0"
   flutter: ">=3.0.0"

@@ -16,7 +16,6 @@ dependencies:
   dio_smart_retry:  
   dio:
   fluttertoast:
-  flutterwebapp_reload_detector:
   url_strategy:
 
 dev_dependencies: 
