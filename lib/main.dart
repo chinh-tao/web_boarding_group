@@ -20,7 +20,6 @@ final _log = Logger();
 void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    setPathUrlStrategy();
 
     api.options
       ..connectTimeout = 10000
