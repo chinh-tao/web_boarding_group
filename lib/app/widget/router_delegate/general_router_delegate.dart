@@ -1,5 +1,4 @@
 import 'package:get/instance_manager.dart';
-import 'package:web_boarding_group/app/common/global.dart';
 import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
 import 'package:web_boarding_group/app/modules/login/views/login_view.dart';
 import 'package:web_boarding_group/app/modules/not_found_view.dart';
@@ -14,6 +13,7 @@ import 'package:flutter/material.dart';
 class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<GeneralRouterPath> {
   static final GeneralRouterDelegate _instance = GeneralRouterDelegate._();
+  final AuthController authController = Get.find();
   bool isLogin = false;
   String? pathName;
   bool isError = false;
@@ -69,21 +69,25 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
     pathName = generalRoutePath.pathName;
     // print(generalRoutePath.pathName);
     // print(Utils.routerName.contains(pathName.toString()));
-    print(html.window.localStorage['is_login']);
+    // print(authController.admin.value.name);
+
+    if (pathName == null) {
+      html.window.localStorage.remove('is_refresh');
+    }
 
     if (!Utils.routerName.contains(pathName.toString()) ||
         generalRoutePath.isUnkown) {
       // print('1');
       pathName = Routes.NOT_FOUND;
       isError = true;
-    } else if (html.window.localStorage['is_login'] != null) {
+    } else if (authController.admin.value.name != null) {
       pathName = Routes.HOME;
       isError = false;
     } else if (generalRoutePath.isOtherPage) {
       if (![null, Routes.NOT_FOUND].contains(pathName)) {
         // print('2');
         if (pathName == Routes.HOME &&
-            (html.window.localStorage['is_login'] == null)) {
+            (authController.admin.value.name == null)) {
           pathName = null;
           isError = false;
         } else {

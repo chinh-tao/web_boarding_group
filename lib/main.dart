@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'package:web_boarding_group/app/modules/auth/auth_binding.dart';
+import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
 import 'app/common/api.dart';
 import 'app/common/config.dart';
 import 'app/common/custom_interceptor.dart';
@@ -18,7 +20,7 @@ final _log = Logger();
 void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    runApp(const MyApp());
+    setPathUrlStrategy();
 
     api.options
       ..connectTimeout = 10000
@@ -35,14 +37,26 @@ void main() {
           ],
           retries: 3)
     ]);
+    runApp(const MyApp());
   }, (err, stackTrace) {
     _log.e("App Error: $err");
     _log.d("StackTrace: $stackTrace");
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    Get.put<AuthController>(AuthController());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
