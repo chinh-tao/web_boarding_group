@@ -2,7 +2,6 @@ import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:web_boarding_group/app/common/global.dart';
 import 'package:web_boarding_group/app/model/admin_model.dart';
 import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
 import 'package:web_boarding_group/app/routes/app_pages.dart';
@@ -26,7 +25,8 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     inputEmail.text = 'chinhtao1908@gmail.com';
-    inputPass.text = 'Ssv@1234';
+    inputPass.text = 'yGN9?MKM';
+    html.window.localStorage.remove('is_refresh');
     super.onInit();
   }
 

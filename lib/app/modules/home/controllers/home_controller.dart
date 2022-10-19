@@ -8,12 +8,12 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    initData();
     super.onInit();
   }
 
   @override
   void onReady() {
+    initData();
     super.onReady();
   }
 
@@ -22,5 +22,7 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void initData() {}
+  void initData() {
+    authController.checkReload = true;
+  }
 }

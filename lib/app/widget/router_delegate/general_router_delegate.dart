@@ -69,15 +69,11 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
     pathName = generalRoutePath.pathName;
     // print(generalRoutePath.pathName);
     // print(Utils.routerName.contains(pathName.toString()));
-    print(authController.admin.value.name);
-
-    if (pathName == null) {
-      html.window.localStorage.remove('is_refresh');
-    }
+    // print(authController.admin.value.name);
 
     if (!Utils.routerName.contains(pathName.toString()) ||
         generalRoutePath.isUnkown) {
-      print('1');
+      // print('1');
       pathName = Routes.NOT_FOUND;
       isError = true;
     } else if (authController.admin.value.name != null) {
@@ -85,7 +81,7 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
       isError = false;
     } else if (generalRoutePath.isOtherPage) {
       if (![null, Routes.NOT_FOUND].contains(pathName)) {
-        print('2');
+        // print('2');
         if (pathName == Routes.HOME &&
             (authController.admin.value.name == null)) {
           pathName = null;
@@ -95,12 +91,12 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
           isError = false;
         }
       } else if (!isError && pathName == Routes.NOT_FOUND) {
-        print('anc');
+        // print('anc');
         isError = false;
         pathName = null;
       }
     } else {
-      print('4');
+      // print('4');
       pathName = null;
       isError = false;
     }

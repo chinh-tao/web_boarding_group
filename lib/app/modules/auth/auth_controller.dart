@@ -2,10 +2,10 @@ import 'dart:html' as html;
 
 import 'package:get/get.dart';
 import 'package:web_boarding_group/app/model/admin_model.dart';
-import 'package:web_boarding_group/app/routes/app_pages.dart';
 
 class AuthController extends GetxController {
   final admin = AdminModel().obs;
+  bool checkReload = false;
 
   @override
   void onInit() {
@@ -25,13 +25,14 @@ class AuthController extends GetxController {
 
   void initData() {
     html.window.onBeforeUnload.listen((event) {
-      if (!['/', Routes.FORGOT_PASS].contains(html.window.location.pathname)) {
+      if (checkReload) {
         html.window.localStorage['is_refresh'] = 'done';
       }
     });
 
     if (html.window.localStorage['is_refresh'] == 'done') {
       admin.value.name = "Nguyễn Thị Vân";
+      html.window.localStorage.remove('is_refresh');
     }
   }
 }
