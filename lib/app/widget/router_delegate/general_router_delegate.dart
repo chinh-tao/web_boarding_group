@@ -4,7 +4,6 @@ import 'package:web_boarding_group/app/modules/login/views/login_view.dart';
 import 'package:web_boarding_group/app/modules/not_found_view.dart';
 import 'package:web_boarding_group/app/routes/app_pages.dart';
 
-import 'dart:html' as html;
 import '../../common/utils.dart';
 import 'general_page.dart';
 import 'general_router_path.dart';

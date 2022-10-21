@@ -45,7 +45,6 @@
   <script>
     if (performance.navigation.type != performance.navigation.TYPE_RELOAD) {
       window.localStorage.removeItem('is_refresh');
-      console.log('This page is not reloaded');
     }
 
     window.addEventListener('load', function (ev) {
