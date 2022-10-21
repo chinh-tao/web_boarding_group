@@ -23,6 +23,6 @@ class HomeController extends GetxController {
   }
 
   void initData() {
-    authController.checkReload = true;
+    html.window.localStorage['is_refresh'] = 'done';
   }
 }

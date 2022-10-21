@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-import 'package:url_strategy/url_strategy.dart';
 import 'package:web_boarding_group/app/modules/auth/auth_binding.dart';
 import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
 import 'app/common/api.dart';

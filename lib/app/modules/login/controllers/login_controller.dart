@@ -26,7 +26,6 @@ class LoginController extends GetxController {
   void onInit() {
     inputEmail.text = 'chinhtao1908@gmail.com';
     inputPass.text = 'yGN9?MKM';
-    html.window.localStorage.remove('is_refresh');
     super.onInit();
   }
 
