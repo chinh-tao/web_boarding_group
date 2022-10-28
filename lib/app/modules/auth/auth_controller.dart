@@ -5,7 +5,6 @@ import 'package:web_boarding_group/app/model/admin_model.dart';
 
 class AuthController extends GetxController {
   final admin = AdminModel().obs;
-  bool checkReload = false;
 
   @override
   void onInit() {

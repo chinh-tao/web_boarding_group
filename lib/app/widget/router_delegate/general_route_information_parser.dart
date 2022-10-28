@@ -15,10 +15,7 @@ class GeneralRouteInformationParser
       return GeneralRouterPath.home();
     }
 
-    if (uri.pathSegments.length == 1) {
-      if (!Utils.routerName.contains(uri.toString())) {
-        return GeneralRouterPath.unKown();
-      }
+    if (Utils.routerName.contains(uri.toString())) {
       return GeneralRouterPath.otherPage(uri.toString());
     }
     return GeneralRouterPath.unKown();

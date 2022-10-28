@@ -1,5 +1,6 @@
 import 'package:get/instance_manager.dart';
 import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
+import 'package:web_boarding_group/app/modules/home/views/home_view.dart';
 import 'package:web_boarding_group/app/modules/login/views/login_view.dart';
 import 'package:web_boarding_group/app/modules/not_found_view.dart';
 import 'package:web_boarding_group/app/routes/app_pages.dart';
@@ -49,9 +50,7 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
             const MaterialPage(
                 key: ValueKey('Not Found'), child: NotFoundView())
           ] else
-            MaterialPage(
-                key: ValueKey(pathName),
-                child: GeneralPage(pathName: pathName!))
+            const MaterialPage(key: ValueKey(Routes.HOME), child: HomeView())
         ],
         onPopPage: (route, result) {
           if (!route.didPop(result)) return false;
@@ -76,17 +75,20 @@ class GeneralRouterDelegate extends RouterDelegate<GeneralRouterPath>
       pathName = Routes.NOT_FOUND;
       isError = true;
     } else if (authController.admin.value.name != null) {
-      pathName = Routes.HOME;
-      isError = false;
+      if ([null, Routes.FORGOT_PASS, Routes.HOME, Routes.NOT_FOUND]
+          .contains(pathName)) {
+        pathName = Routes.HOME;
+        isError = false;
+      } else {
+        pathName = pathName;
+        isError = false;
+      }
     } else if (generalRoutePath.isOtherPage) {
       if (![null, Routes.NOT_FOUND].contains(pathName)) {
         // print('2');
         if (pathName == Routes.HOME &&
             (authController.admin.value.name == null)) {
           pathName = null;
-          isError = false;
-        } else {
-          pathName = generalRoutePath.pathName;
           isError = false;
         }
       } else if (!isError && pathName == Routes.NOT_FOUND) {

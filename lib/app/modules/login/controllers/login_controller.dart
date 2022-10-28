@@ -84,7 +84,7 @@ class LoginController extends GetxController {
 
     if (res.statusCode == 200 && res.data['code'] == 0) {
       authController.admin.value = AdminModel.fromJson(res.data['payload']);
-      GeneralRouterDelegate().setPathName(pathName: Routes.HOME);
+      generalRouterDelegate.setPathName(pathName: Routes.HOME);
     } else {
       Utils.messError(context, res.data['message']);
     }
