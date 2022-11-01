@@ -31,4 +31,25 @@ class AdminModel {
         "email": email == null ? null : email,
         "name": name == null ? null : name,
       };
+
+  String get getEmail {
+    if (email == null) {
+      return '';
+    }
+    return email!;
+  }
+
+  String get getName {
+    if (name == null) {
+      return '';
+    }
+    return name!;
+  }
+
+  String get getId {
+    if (idBranch == null) {
+      return '';
+    }
+    return idBranch!;
+  }
 }

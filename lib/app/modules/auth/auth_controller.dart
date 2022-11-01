@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:html' as html;
+import 'dart:js' as js;
 
 import 'package:get/get.dart';
+import 'package:web_boarding_group/app/common/api.dart';
 import 'package:web_boarding_group/app/model/admin_model.dart';
 
 class AuthController extends GetxController {
@@ -23,11 +26,21 @@ class AuthController extends GetxController {
   }
 
   void initData() {
+    handleReloadPage();
+  }
+
+  void handleReloadPage() async {
     if (html.window.performance.navigation.type ==
         html.PerformanceNavigation.TYPE_RELOAD) {
       if (html.window.localStorage['is_refresh'] == 'done') {
-        admin.value.name = "Nguyễn Thị Vân";
+        getInforAdmin();
       }
     }
+  }
+
+  void getInforAdmin() {
+    admin.value.email = js.context['dataAdmin']['email'];
+    admin.value.name = js.context['dataAdmin']['name'];
+    admin.value.idBranch = js.context['dataAdmin']['idBranch'];
   }
 }

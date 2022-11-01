@@ -11,8 +11,8 @@ import 'package:web_boarding_group/app/modules/auth/auth_controller.dart';
 import 'app/common/api.dart';
 import 'app/common/config.dart';
 import 'app/common/custom_interceptor.dart';
-import 'app/widget/router_delegate/general_route_information_parser.dart';
-import 'app/widget/router_delegate/general_router_delegate.dart';
+import 'app/routes/router_delegate/general_route_information_parser.dart';
+import 'app/routes/router_delegate/general_router_delegate.dart';
 
 final _log = Logger();
 

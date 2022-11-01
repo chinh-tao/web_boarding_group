@@ -8,7 +8,7 @@ import 'package:web_boarding_group/app/routes/app_pages.dart';
 
 import '../../../common/api.dart';
 import '../../../common/utils.dart';
-import '../../../widget/router_delegate/general_router_delegate.dart';
+import '../../../routes/router_delegate/general_router_delegate.dart';
 
 class LoginController extends GetxController {
   final AuthController authController = Get.find();
@@ -84,6 +84,8 @@ class LoginController extends GetxController {
 
     if (res.statusCode == 200 && res.data['code'] == 0) {
       authController.admin.value = AdminModel.fromJson(res.data['payload']);
+      html.window.localStorage['id-branch'] =
+          authController.admin.value.idBranch!;
       generalRouterDelegate.setPathName(pathName: Routes.HOME);
     } else {
       Utils.messError(context, res.data['message']);

@@ -18,6 +18,7 @@ const kGreenColor_700 = Color(0xff689f38);
 const kIndegoColor = Color(0xff1976d2);
 const kIndigoBlueColor900 = Color(0xff344585);
 const kYellowColor_800 = Color(0xfff9a825);
+const kYellowColor_200 = Color(0xfffff59d);
 const kOrangeColor_800 = Color(0xfffb8c00);
 
 //config message

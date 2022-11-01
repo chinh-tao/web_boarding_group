@@ -20,16 +20,16 @@ class CustomInterceptors extends Interceptor {
           gravity: ToastGravity.TOP);
       return;
     }
-    options.baseUrl = kApiUrlProduction;
-    // _log.i(
-    //     'TYPE: Request,\nPATH: ${options.path},\nMETHOD: ${options.method},\nDATA: ${options.data}');
+    options.baseUrl = kApiUrlStaging;
+    _log.i(
+        'TYPE: Request,\nPATH: ${options.path},\nMETHOD: ${options.method},\nDATA: ${options.data}');
     super.onRequest(options, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // _log.i(
-    //     'TYPE: Reponse,\nSTATUSCODE: ${response.statusCode},\nPATH: ${response.requestOptions.path},\nMETHOD: ${response.requestOptions.method},\nDATA: ${response.data}');
+    _log.i(
+        'TYPE: Reponse,\nSTATUSCODE: ${response.statusCode},\nPATH: ${response.requestOptions.path},\nMETHOD: ${response.requestOptions.method},\nDATA: ${response.data}');
     super.onResponse(response, handler);
   }
 
