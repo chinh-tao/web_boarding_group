@@ -5,6 +5,7 @@ function initData() {
     if (navigation.type == 'navigate') {
         console.log("op-1");
         window.localStorage.removeItem('is_refresh');
+        window.localStorage.removeItem('id-branch');
     } else if(navigation.type == 'reload'){
         console.log("op-2");
         if (window.localStorage['is_refresh'] == 'done') {

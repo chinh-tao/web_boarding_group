@@ -36,7 +36,8 @@ class AuthController extends GetxController {
       print("2: ${html.window.localStorage['is_refresh']}");
       if (html.window.localStorage['is_refresh'] == 'done') {
         print("3: ${js.context['dataAdmin']}");
-        getInforAdmin();
+        admin.value.name = 'Nguyễn Thị Vân';
+        //getInforAdmin();
         print("4: ${admin.value.email}");
         print("5: ${admin.value.name}");
         print("6: ${admin.value.idBranch}");
