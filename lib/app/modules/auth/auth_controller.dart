@@ -33,7 +33,8 @@ class AuthController extends GetxController {
     if (html.window.performance.navigation.type ==
         html.PerformanceNavigation.TYPE_RELOAD) {
       if (html.window.localStorage['is_refresh'] == 'done') {
-        getInforAdmin();
+        // getInforAdmin();
+        admin.value.name = 'Nguyễn Thị Vân';
       }
     }
   }
