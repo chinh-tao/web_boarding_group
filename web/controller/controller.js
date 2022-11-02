@@ -1,15 +1,14 @@
 const navigation = performance.getEntriesByType("navigation")[0];
 
 function initData() {
-    console.log(navigation.type);
     if (navigation.type == 'navigate') {
-        console.log("op-1");
+        console.log("Remove old data");
         window.localStorage.removeItem('is_refresh');
         window.localStorage.removeItem('id-branch');
     } else if(navigation.type == 'reload'){
-        console.log("op-2");
+        console.log("Reload data page");
         if (window.localStorage['is_refresh'] == 'done') {
-            console.log("op-2.1");
+            console.log("Load data infor");
             getInforAdmin();
         }
     }
@@ -23,6 +22,7 @@ async function getInforAdmin() {
         },
     });
     const data = await res.json();
+    console.log(res.status,data);
     window.dataAdmin = data['payload'];
 }
 
