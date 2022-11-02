@@ -35,10 +35,10 @@ class AuthController extends GetxController {
         html.PerformanceNavigation.TYPE_RELOAD) {
       if (html.window.localStorage['is_refresh'] == 'done') {
         print(js.context['dataAdmin']);
+        getInforAdmin();
         print(admin.value.email);
         print(admin.value.name);
         print(admin.value.idBranch);
-        getInforAdmin();
       }
     }
   }

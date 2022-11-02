@@ -1,10 +1,12 @@
 const navigation = performance.getEntriesByType("navigation");
 
-function initData(){
+function initData() {
     if (navigation.type != navigation.TYPE_RELOAD) {
         window.localStorage.removeItem('is_refresh');
-    } else if (window.localStorage['is_refresh'] == 'done') {
-        getInforAdmin();
+    } else {
+        if (window.localStorage['is_refresh'] == 'done') {
+            getInforAdmin();
+        }
     }
 }
 
@@ -16,7 +18,6 @@ async function getInforAdmin() {
         },
     });
     const data = await res.json();
-    console.log(res.status,data);
     window.dataAdmin = data['payload'];
 }
 
