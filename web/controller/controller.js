@@ -28,7 +28,6 @@ async function getInforAdmin() {
     if (res.status == 200) {
         const data = await res.json();
         if (data['code'] == 0) {
-            console.log('aaa');
             window.dataAdmin = data['payload'];
             handleInitApp();
         }
