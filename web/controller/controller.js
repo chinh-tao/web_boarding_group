@@ -1,11 +1,11 @@
-const navigation = performance.getEntriesByType("navigation");
+const navigation = performance.getEntriesByType("navigation")[0];
 
 function initData() {
     console.log(navigation.type);
-    if (navigation.type != navigation.TYPE_RELOAD) {
+    if (navigation.type == 'navigate') {
         console.log("op-1");
         window.localStorage.removeItem('is_refresh');
-    } else if(navigation.type == navigation.TYPE_RELOAD) {
+    } else if(navigation.type == 'reload'){
         console.log("op-2");
         if (window.localStorage['is_refresh'] == 'done') {
             console.log("op-2.1");
