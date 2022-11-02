@@ -9,7 +9,7 @@ function initData(){
 }
 
 async function getInforAdmin() {
-    const res = await fetch(`http://192.168.19.91:8000/web/infor-admin?id=${window.localStorage['id-branch']}`, {
+    const res = await fetch(`https://boarding-group.herokuapp.com/web/infor-admin?id=${window.localStorage['id-branch']}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
