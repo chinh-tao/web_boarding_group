@@ -16,6 +16,7 @@ async function getInforAdmin() {
         },
     });
     const data = await res.json();
+    console.log(res.status,data);
     window.dataAdmin = data['payload'];
 }
 
