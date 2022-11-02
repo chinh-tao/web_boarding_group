@@ -30,15 +30,16 @@ class AuthController extends GetxController {
   }
 
   void handleReloadPage() async {
-    print(html.window.localStorage['is_refresh']);
+    print("1: ${html.window.localStorage['is_refresh']}");
     if (html.window.performance.navigation.type ==
         html.PerformanceNavigation.TYPE_RELOAD) {
+      print("2: ${html.window.localStorage['is_refresh']}");
       if (html.window.localStorage['is_refresh'] == 'done') {
-        print(js.context['dataAdmin']);
+        print("3: ${js.context['dataAdmin']}");
         getInforAdmin();
-        print(admin.value.email);
-        print(admin.value.name);
-        print(admin.value.idBranch);
+        print("4: ${admin.value.email}");
+        print("5: ${admin.value.name}");
+        print("6: ${admin.value.idBranch}");
       }
     }
   }
