@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:web_boarding_group/app/common/global.dart';
 import 'package:web_boarding_group/app/routes/app_pages.dart';
 import 'package:web_boarding_group/app/widget/icon/icon_delete_icons.dart';
 import 'package:web_boarding_group/app/widget/icon/icon_tick_icons.dart';
@@ -97,7 +98,7 @@ class Utils {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             content: Text(content,
-                style: PrimaryStyle.medium(20, color: kIndigoBlueColor900)),
+                style: PrimaryStyle.medium(20, color: kIndigoColor900)),
             contentPadding:
                 const EdgeInsets.only(bottom: 5, top: 23, left: 20, right: 20),
             actions: [
@@ -105,7 +106,7 @@ class Utils {
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text(
                     'hủy',
-                    style: PrimaryStyle.medium(18, color: kIndigoBlueColor900),
+                    style: PrimaryStyle.medium(18, color: kIndigoColor900),
                   )),
               TextButton(
                   onPressed: onPressed,
@@ -124,5 +125,19 @@ class Utils {
       result.add(data.name);
     }
     return result;
+  }
+
+  static double get maxWidthScreen {
+    if (maxWidth < 800) {
+      return 400 * 2;
+    }
+    return maxWidth;
+  }
+
+  static double get maxHeightBody {
+    if (maxHeight < 630) {
+      return 729;
+    }
+    return maxHeight - 110;
   }
 }

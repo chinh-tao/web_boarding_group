@@ -8,7 +8,7 @@ class CustomInput extends StatelessWidget {
   const CustomInput(
       {Key? key,
       required this.controller,
-      required this.err,
+      this.err = '',
       this.title = '',
       this.colorTitle = kBodyText,
       this.maxLength,
@@ -21,7 +21,8 @@ class CustomInput extends StatelessWidget {
       this.hintText = '',
       this.background = kGreyColor_50,
       this.button,
-      this.isBorderErr = true})
+      this.isBorderErr = true,
+      this.paddingLeft = 0})
       : super(key: key);
 
   final TextEditingController controller;
@@ -33,6 +34,7 @@ class CustomInput extends StatelessWidget {
   final bool obscureText, readOnly, isBorderErr;
   final Widget? icons, button;
   final Function()? onPressed;
+  final double paddingLeft;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,10 @@ class CustomInput extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (title.isNotEmpty) ...[
-          Text(title, style: PrimaryStyle.normal(16, color: colorTitle)),
+          Padding(
+            padding: EdgeInsets.only(left: paddingLeft),
+            child: Text(title, style: PrimaryStyle.bold(16, color: colorTitle)),
+          ),
           const SizedBox(height: 5)
         ],
         Row(
@@ -52,7 +57,8 @@ class CustomInput extends StatelessWidget {
                 height: 47,
                 child: TextField(
                   controller: controller,
-                  style: PrimaryStyle.normal(14, color: kBodyText),
+                  style: PrimaryStyle.medium(14,
+                      color: kBodyText.withOpacity(0.83)),
                   maxLength: maxLength,
                   inputFormatters: inputFormatters,
                   keyboardType: keyboardType ?? TextInputType.visiblePassword,
@@ -73,14 +79,14 @@ class CustomInput extends StatelessWidget {
                           borderSide: BorderSide(
                               width: 2,
                               color: isBorderErr
-                                  ? kBlackColor_900.withOpacity(0.5)
+                                  ? kBlackColor_900.withOpacity(0.3)
                                   : kRedColor_400)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(7),
                           borderSide: readOnly
                               ? BorderSide(
                                   width: 2,
-                                  color: kBlackColor_900.withOpacity(0.5))
+                                  color: kBlackColor_900.withOpacity(0.3))
                               : BorderSide(
                                   color: kIndegoColor.withOpacity(0.8),
                                   width: 2))),

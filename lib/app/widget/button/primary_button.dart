@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
 import '../../common/config.dart';
-import '../../common/primary_style.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton(
       {Key? key,
       required this.content,
       required this.onPressed,
-      this.colors = kIndigoBlueColor900})
+      this.colors = kIndigoColor900,
+      this.radius = 30})
       : super(key: key);
 
   final Function()? onPressed;
   final Color? colors;
   final Widget content;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class PrimaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             primary: colors,
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30))),
+                borderRadius: BorderRadius.circular(radius))),
         onPressed: onPressed,
         child: content);
   }

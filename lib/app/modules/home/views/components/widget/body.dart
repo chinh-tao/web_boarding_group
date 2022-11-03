@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:web_boarding_group/app/common/utils.dart';
 
 import '../body/add_member.dart';
 import '../body/create_invoice.dart';
 import '../body/list_member.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key, required this.maxHeight, required this.tabController})
-      : super(key: key);
+  const Body({Key? key, required this.tabController}) : super(key: key);
 
-  final double maxHeight;
   final TabController tabController;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: maxHeightBody(maxHeight),
+      height: Utils.maxHeightBody,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: const BorderRadius.only(
@@ -33,12 +32,5 @@ class Body extends StatelessWidget {
           controller: tabController,
           children: const [ListMemeber(), AddMember(), CreateInvoice()]),
     );
-  }
-
-  double maxHeightBody(double size) {
-    if (size < 829) {
-      return 729;
-    }
-    return size;
   }
 }

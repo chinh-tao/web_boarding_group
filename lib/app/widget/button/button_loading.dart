@@ -14,14 +14,15 @@ class ButtonLoading extends StatelessWidget {
       this.width = 10,
       this.sizeContent = 16,
       this.colors = kPrimaryColor,
-      this.scale = 0.8})
+      this.scale = 0.8,
+      this.radius = 30})
       : super(key: key);
 
   final bool isLoading;
   final String titleButton;
   final Function()? onPressed;
   final double height, width;
-  final double sizeContent, scale;
+  final double sizeContent, scale, radius;
   final Color? colors;
 
   @override
@@ -31,6 +32,7 @@ class ButtonLoading extends StatelessWidget {
         height: height,
         width: width,
         child: PrimaryButton(
+            radius: radius,
             colors: kGreyColor_50,
             content: Center(
                 child: Transform.scale(
@@ -43,6 +45,7 @@ class ButtonLoading extends StatelessWidget {
       height: height,
       width: width,
       child: PrimaryButton(
+          radius: radius,
           colors: colors,
           content: Text(
             titleButton,

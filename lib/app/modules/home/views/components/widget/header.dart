@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:web_boarding_group/app/common/utils.dart';
 import 'package:web_boarding_group/app/modules/home/controllers/home_controller.dart';
 import '../../../../../common/config.dart';
 import '../../../../../common/primary_style.dart';
 
 class Header extends StatelessWidget {
-  const Header({Key? key, required this.controller, required this.width})
-      : super(key: key);
+  const Header({Key? key, required this.controller}) : super(key: key);
 
   final HomeController controller;
-  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class Header extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: width / 3,
+              width: Utils.maxWidthScreen / 3,
               child: Row(
                 children: [
                   SizedBox(
@@ -53,7 +52,7 @@ class Header extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: width / 2,
+              width: Utils.maxWidthScreen / 2,
               child: Container(
                 margin: const EdgeInsets.only(top: 40),
                 alignment: Alignment.centerRight,

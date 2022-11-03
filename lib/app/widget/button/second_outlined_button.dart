@@ -30,7 +30,7 @@ class SecondOutlinedButton extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             fixedSize: Size(width, height),
-            side: BorderSide(color: color!, width: 2),
+            side: BorderSide(color: color!, width: 3),
             padding: const EdgeInsets.all(10),
             backgroundColor: background),
         onPressed: onPressed,

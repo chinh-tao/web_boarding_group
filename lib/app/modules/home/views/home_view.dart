@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:web_boarding_group/app/common/global.dart';
+import 'package:web_boarding_group/app/common/utils.dart';
 import 'package:web_boarding_group/app/modules/home/bindings/home_binding.dart';
 import 'package:web_boarding_group/app/modules/home/views/components/widget/body.dart';
 import 'package:web_boarding_group/app/modules/home/views/components/widget/header.dart';
@@ -22,24 +24,21 @@ class HomeView extends GetView<HomeController> {
               binding: HomeBinding(),
               routeName: Routes.HOME,
               page: () => LayoutBuilder(builder: (context, constraints) {
+                    maxWidth = constraints.maxWidth;
+                    maxHeight = constraints.maxHeight;
                     return SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       physics: const ClampingScrollPhysics(),
                       child: Container(
-                        width: maxWidthScreen(constraints.maxWidth),
+                        width: Utils.maxWidthScreen,
                         color: kPrimaryColor,
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           physics: const ClampingScrollPhysics(),
                           child: Column(
                             children: [
-                              Header(
-                                controller: controller,
-                                width: maxWidthScreen(constraints.maxWidth),
-                              ),
-                              Body(
-                                  maxHeight: constraints.maxHeight,
-                                  tabController: controller.tabController)
+                              Header(controller: controller),
+                              Body(tabController: controller.tabController)
                             ],
                           ),
                         ),
@@ -49,12 +48,5 @@ class HomeView extends GetView<HomeController> {
         },
       ),
     );
-  }
-
-  double maxWidthScreen(double size) {
-    if (size < 800) {
-      return 400 * 2;
-    }
-    return size;
   }
 }
