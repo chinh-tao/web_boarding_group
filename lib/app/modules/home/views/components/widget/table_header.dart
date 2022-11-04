@@ -34,11 +34,11 @@ class TableHeader extends StatelessWidget {
                             style:
                                 PrimaryStyle.normal(16, color: Colors.white)),
                       ),
-                      Text('Email',
+                      Text('Số điện thoại',
                           style: PrimaryStyle.normal(16, color: Colors.white)),
                       Text('Họ và tên',
                           style: PrimaryStyle.normal(16, color: Colors.white)),
-                      Text('Số phòng',
+                      Text('Tên phòng',
                           style: PrimaryStyle.normal(16, color: Colors.white)),
                       Text('Thiết bị đăng kí',
                           style: PrimaryStyle.normal(16, color: Colors.white))

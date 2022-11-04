@@ -25,6 +25,13 @@ class BodyLogin extends StatelessWidget {
     return 'Đăng nhập';
   }
 
+  IconData showIcons(LoginController controller) {
+    if (controller.isObscureText.value) {
+      return Icons.visibility_off_outlined;
+    }
+    return Icons.visibility_outlined;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -68,6 +75,17 @@ class BodyLogin extends StatelessWidget {
                                         const SizedBox(height: 10),
                                         CustomInput(
                                             title: 'Mật khẩu',
+                                            obscureText: _.isObscureText.value,
+                                            icons: IconButton(
+                                                hoverColor: Colors.transparent,
+                                                splashColor: Colors.transparent,
+                                                onPressed: () {
+                                                  _.isObscureText(
+                                                      !_.isObscureText.value);
+                                                  _.update();
+                                                },
+                                                icon: Icon(showIcons(_),
+                                                    color: kPrimaryColor)),
                                             controller: _.inputPass,
                                             isBorderErr: _.listErr[1].isEmpty,
                                             err: _.listErr[1])

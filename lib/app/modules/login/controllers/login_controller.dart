@@ -12,11 +12,12 @@ import '../../../routes/router_delegate/general_router_delegate.dart';
 
 class LoginController extends GetxController {
   final AuthController authController = Get.find();
+  final generalRouterDelegate = GeneralRouterDelegate();
 
   final TextEditingController inputEmail = TextEditingController();
   final TextEditingController inputPass = TextEditingController();
 
-  final generalRouterDelegate = GeneralRouterDelegate();
+  final isObscureText = true.obs;
   final listErr = <String>["", ""].obs;
   final isLoading = false.obs;
   final regex = RegExp(

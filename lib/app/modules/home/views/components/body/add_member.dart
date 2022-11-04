@@ -27,31 +27,39 @@ class AddMember extends StatelessWidget {
                     child: CustomInput(
                         paddingLeft: 7,
                         title: 'ID người dùng',
+                        err: _.listErr[0],
                         controller: _.inputUserId)),
                 const SizedBox(width: 50),
                 Expanded(
-                    child: CustomInput(
-                        paddingLeft: 7,
-                        title: 'Tên thành viên',
-                        controller: _.inputUserName))
+                    child: Padding(
+                  padding:
+                      EdgeInsets.only(bottom: _.listErr[0].isEmpty ? 0 : 15),
+                  child: CustomInput(
+                      paddingLeft: 7,
+                      title: 'Tên thành viên',
+                      controller: _.inputUserName),
+                ))
               ],
             ),
             const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
-                    child: CustomInput(
-                        paddingLeft: 7,
-                        title: 'Số phòng',
-                        controller: _.inputUserRoom)),
+                    child: Padding(
+                  padding:
+                      EdgeInsets.only(bottom: _.listErr[1].isEmpty ? 0 : 15),
+                  child: CustomInput(
+                      paddingLeft: 7,
+                      title: 'Tên phòng',
+                      controller: _.inputUserRoom),
+                )),
                 const SizedBox(width: 50),
                 Expanded(
                     child: CustomInput(
-                        background: kBodyText.withOpacity(0.3),
-                        readOnly: true,
                         paddingLeft: 7,
-                        title: 'ID chi nhánh',
-                        controller: _.inputIdBranch))
+                        title: 'Số điện thoại',
+                        err: _.listErr[1],
+                        controller: _.inputPhone))
               ],
             ),
             const SizedBox(height: 30),
@@ -64,7 +72,7 @@ class AddMember extends StatelessWidget {
                     sizeText: 15,
                     title: 'Làm mới',
                     color: kGreenColor_700.withOpacity(0.8),
-                    onPressed: () {}),
+                    onPressed: () => _.handleClear()),
                 const SizedBox(width: 20),
                 Obx(() => ButtonLoading(
                     radius: 7,
@@ -101,9 +109,9 @@ class AddMember extends StatelessWidget {
                                 : kIndigoColor100,
                             stt: '${index + 1}',
                             id: _.listUser[index].getID,
-                            email: _.listUser[index].getEmail,
+                            phone: _.listUser[index].getPhone,
                             name: _.listUser[index].getUserName,
-                            roomNumber: "${_.listUser[index].getRoomNumber}",
+                            roomNumber: _.listUser[index].getRoomNumber,
                             device: _.listUser[index].getDevice);
                       }))
           ],

@@ -16,7 +16,8 @@ class UserModel {
       this.userName,
       this.device,
       this.images,
-      this.roomNumber});
+      this.roomNumber,
+      this.phone});
 
   String? id;
   String? email;
@@ -24,13 +25,15 @@ class UserModel {
   String? userName;
   String? device;
   String? images;
-  int? roomNumber;
+  String? roomNumber;
+  String? phone;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       id: json["id"] == null ? null : json["id"],
       email: json["email"] == null ? null : json["email"],
       pass: json["pass"] == null ? null : json["pass"],
       userName: json["userName"] == null ? null : json["userName"],
+      phone: json["phone"] == null ? null : json["phone"],
       device: json["deviceMobi"] == null ? null : json["deviceMobi"],
       images: json["images"] == null || json["images"] == ''
           ? null
@@ -42,6 +45,7 @@ class UserModel {
         "email": email == null ? null : email,
         "pass": pass == null ? null : pass,
         "userName": userName == null ? null : userName,
+        "phone": phone == null ? null : phone,
         "deviceMobi": device == null ? null : device,
         "images": images == null ? null : images,
         "roomNumber": roomNumber == null ? null : roomNumber
@@ -82,10 +86,17 @@ class UserModel {
     return images!;
   }
 
-  int get getRoomNumber {
+  String get getRoomNumber {
     if (roomNumber == null) {
-      return 0;
+      return '';
     }
     return roomNumber!;
+  }
+
+  String get getPhone {
+    if (phone == null) {
+      return '';
+    }
+    return phone!;
   }
 }

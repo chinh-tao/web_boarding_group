@@ -6,7 +6,7 @@ class TableRows extends StatelessWidget {
       {Key? key,
       required this.stt,
       required this.id,
-      required this.email,
+      required this.phone,
       required this.name,
       required this.roomNumber,
       required this.device,
@@ -14,7 +14,7 @@ class TableRows extends StatelessWidget {
       : super(key: key);
 
   final Color? background;
-  final String stt, id, email, name, roomNumber, device;
+  final String stt, id, phone, name, roomNumber, device;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class TableRows extends StatelessWidget {
                       Text(id, style: PrimaryStyle.normal(14)),
                       Container(
                         margin: const EdgeInsets.only(right: 20),
-                        child: Text(email, style: PrimaryStyle.normal(14)),
+                        child: Text(phone, style: PrimaryStyle.normal(14)),
                       ),
                       Text(name, style: PrimaryStyle.normal(14)),
                       Text(roomNumber, style: PrimaryStyle.normal(14)),
